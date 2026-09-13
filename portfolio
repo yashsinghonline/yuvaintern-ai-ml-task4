@@ -1,0 +1,2848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Yash Singh — Data Analytics Portfolio</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"]
+      },
+      colors: {
+        brand: {
+          500: "#f97316",
+          600: "#ea580c"
+        }
+      }
+    }
+  }
+}
+</script>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #050505;
+  color: #a1a1aa;
+  font-family: Inter, sans-serif;
+}
+
+::selection {
+  background: rgba(249,115,22,.25);
+  color: #fb923c;
+}
+
+.border-subtle {
+  border-color: rgba(255,255,255,.07);
+}
+
+.bg-card {
+  background: #0a0a0a;
+}
+
+.code-box {
+  background: #030303;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+pre {
+  margin: 0;
+  overflow-x: auto;
+  padding: 20px;
+}
+
+pre code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #d4d4d8;
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 280px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: .7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.finding-card,
+.decision-card {
+  transition: transform .25s ease, border-color .25s ease;
+}
+
+.finding-card:hover,
+.decision-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(249,115,22,.35);
+}
+
+.number {
+  color: #f97316;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.tag {
+  border: 1px solid rgba(255,255,255,.08);
+  background: #111;
+  color: #a1a1aa;
+}
+
+.metric {
+  border: 1px solid rgba(255,255,255,.07);
+  background: linear-gradient(145deg,#0d0d0d,#080808);
+}
+
+.metric strong {
+  color: #fafafa;
+}
+
+.filter-btn {
+  border: 1px solid rgba(255,255,255,.08);
+  background: #0c0c0c;
+  transition: .2s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: #f97316;
+  color: #000;
+  border-color: #f97316;
+}
+
+.copy-btn {
+  transition: .2s;
+}
+
+.copy-btn:hover {
+  color: #f97316;
+}
+
+.project-nav {
+  position: sticky;
+  top: 64px;
+  z-index: 30;
+}
+
+@media(max-width:768px) {
+  .chart-wrapper {
+    height: 240px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<header class="sticky top-0 z-50 border-b border-subtle bg-black/80 backdrop-blur-xl">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
+
+    <div class="flex items-center gap-3">
+      <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
+
+      <span class="font-mono text-xs tracking-widest text-zinc-200">
+        YASH SINGH // DATA ANALYTICS
+      </span>
+    </div>
+
+    <nav class="hidden md:flex gap-7 font-mono text-xs text-zinc-500">
+      <a href="#about" class="hover:text-white">ABOUT</a>
+      <a href="#skills" class="hover:text-white">SKILLS</a>
+      <a href="#projects" class="hover:text-white">PROJECTS</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<!-- HERO -->
+<section id="about" class="max-w-7xl mx-auto px-5 md:px-8 pt-24 pb-20">
+
+  <div class="max-w-4xl reveal">
+
+    <div class="inline-flex items-center px-3 py-1 rounded-full border border-subtle bg-zinc-900 font-mono text-[10px] text-orange-400 mb-6">
+      DATA ANALYTICS / RESEARCH / VISUALIZATION
+    </div>
+
+    <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.05]">
+      Turning raw data into
+      <span class="text-orange-500">decisions.</span>
+    </h1>
+
+    <p class="mt-7 max-w-3xl text-base md:text-lg leading-8 text-zinc-400">
+      A practical analytics portfolio focused on discovering patterns,
+      explaining why they matter, and translating analytical findings into
+      decisions that businesses can act on.
+    </p>
+
+  </div>
+
+
+  <!-- QUICK METRICS -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-14 reveal">
+
+    <div class="metric p-5 rounded-xl">
+      <div class="font-mono text-[10px] text-zinc-500 uppercase">
+        Projects
+      </div>
+      <strong class="block text-2xl mt-2">04</strong>
+    </div>
+
+    <div class="metric p-5 rounded-xl">
+      <div class="font-mono text-[10px] text-zinc-500 uppercase">
+        Primary Language
+      </div>
+      <strong class="block text-2xl mt-2">Python</strong>
+    </div>
+
+    <div class="metric p-5 rounded-xl">
+      <div class="font-mono text-[10px] text-zinc-500 uppercase">
+        Visualization
+      </div>
+      <strong class="block text-2xl mt-2">Chart.js</strong>
+    </div>
+
+    <div class="metric p-5 rounded-xl">
+      <div class="font-mono text-[10px] text-zinc-500 uppercase">
+        Focus
+      </div>
+      <strong class="block text-2xl mt-2">Insights</strong>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SKILLS -->
+<section id="skills" class="border-y border-subtle">
+
+  <div class="max-w-7xl mx-auto px-5 md:px-8 py-12">
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+
+      <div>
+        <div class="font-mono text-[10px] text-zinc-600 mb-2">
+          COMPUTE
+        </div>
+        <div class="text-sm text-zinc-200">
+          Python / NumPy / SciPy
+        </div>
+      </div>
+
+      <div>
+        <div class="font-mono text-[10px] text-zinc-600 mb-2">
+          DATA
+        </div>
+        <div class="text-sm text-zinc-200">
+          Pandas / Statsmodels
+        </div>
+      </div>
+
+      <div>
+        <div class="font-mono text-[10px] text-zinc-600 mb-2">
+          MACHINE LEARNING
+        </div>
+        <div class="text-sm text-zinc-200">
+          Scikit-Learn / XGBoost / SHAP
+        </div>
+      </div>
+
+      <div>
+        <div class="font-mono text-[10px] text-zinc-600 mb-2">
+          VISUALIZATION
+        </div>
+        <div class="text-sm text-zinc-200">
+          Matplotlib / Seaborn / Chart.js
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PROJECT NAV -->
+<div class="project-nav border-b border-subtle bg-[#050505]/95 backdrop-blur">
+
+  <div class="max-w-7xl mx-auto px-5 md:px-8 py-3 flex gap-2 overflow-x-auto">
+
+    <a href="#project1" class="filter-btn px-3 py-2 rounded-lg text-[10px] font-mono whitespace-nowrap">
+      01 / CHURN
+    </a>
+
+    <a href="#project2" class="filter-btn px-3 py-2 rounded-lg text-[10px] font-mono whitespace-nowrap">
+      02 / SEGMENTATION
+    </a>
+
+    <a href="#project3" class="filter-btn px-3 py-2 rounded-lg text-[10px] font-mono whitespace-nowrap">
+      03 / HOUSING
+    </a>
+
+    <a href="#project4" class="filter-btn px-3 py-2 rounded-lg text-[10px] font-mono whitespace-nowrap">
+      04 / SENTIMENT
+    </a>
+
+  </div>
+
+</div>
+
+
+<main id="projects" class="max-w-7xl mx-auto px-5 md:px-8 py-16 space-y-24">
+
+
+<!-- ========================================================= -->
+<!-- PROJECT 1 -->
+<!-- ========================================================= -->
+
+<article id="project1" class="reveal bg-card border border-subtle rounded-2xl overflow-hidden">
+
+  <!-- HEADER -->
+
+  <div class="p-6 md:p-10 border-b border-subtle">
+
+    <div class="flex flex-col lg:flex-row justify-between gap-6">
+
+      <div>
+
+        <div class="font-mono text-xs text-orange-500 mb-3">
+          PROJECT 01 // CLASSIFICATION + EDA
+        </div>
+
+        <h2 class="text-3xl md:text-4xl font-bold text-white">
+          Telco Customer Churn
+        </h2>
+
+        <p class="mt-3 max-w-3xl text-zinc-400 leading-7">
+          An analysis of customer behavior to understand which customer
+          characteristics are associated with churn and where retention
+          efforts should be focused.
+        </p>
+
+      </div>
+
+      <div class="flex flex-wrap gap-2 h-fit">
+
+        <span class="tag px-3 py-2 rounded-lg text-[10px] font-mono">
+          PANDAS
+        </span>
+
+        <span class="tag px-3 py-2 rounded-lg text-[10px] font-mono">
+          SCIPY
+        </span>
+
+        <span class="tag px-3 py-2 rounded-lg text-[10px] font-mono">
+          SCIKIT-LEARN
+        </span>
+
+        <span class="tag px-3 py-2 rounded-lg text-[10px] font-mono">
+          SHAP
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="p-6 md:p-10 space-y-12">
+
+
+    <!-- PROBLEM -->
+
+    <section>
+
+      <div class="font-mono text-xs text-orange-500 mb-3">
+        01 / BUSINESS PROBLEM
+      </div>
+
+      <h3 class="text-xl font-semibold text-white mb-4">
+        Why are customers leaving?
+      </h3>
+
+      <p class="text-sm leading-7 text-zinc-400 max-w-4xl">
+        Customer churn directly affects recurring revenue. The business
+        problem is not simply knowing how many customers leave, but
+        understanding which characteristics are associated with churn so
+        that retention teams can prioritize the customers and behaviors
+        that deserve attention.
+      </p>
+
+    </section>
+
+
+    <!-- DATA -->
+
+    <section class="grid md:grid-cols-3 gap-3">
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">DATASET</span>
+        <strong class="block mt-2 text-sm">
+          IBM Telco Customer Churn
+        </strong>
+      </div>
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">SAMPLE</span>
+        <strong class="block mt-2 text-sm">
+          7,043 customers
+        </strong>
+      </div>
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">MODEL</span>
+        <strong class="block mt-2 text-sm">
+          Random Forest
+        </strong>
+      </div>
+
+    </section>
+
+
+    <!-- ANALYSIS -->
+
+    <section>
+
+      <div class="font-mono text-xs text-orange-500 mb-3">
+        02 / ANALYSIS
+      </div>
+
+      <p class="text-sm text-zinc-400 leading-7 max-w-4xl">
+        The analysis examined customer tenure, monthly charges, contract
+        structure and service characteristics. A Mann-Whitney U test was
+        used because customer charge distributions could not simply be
+        assumed to follow a normal distribution. Multicollinearity was
+        also examined before modeling.
+      </p>
+
+    </section>
+
+
+    <!-- CODE -->
+
+    <section class="code-box">
+
+      <div class="px-4 py-3 border-b border-subtle flex justify-between items-center">
+
+        <span class="font-mono text-[10px] text-zinc-500">
+          churn_analysis.py
+        </span>
+
+        <button
+          class="copy-btn font-mono text-[10px] text-zinc-500"
+          onclick="copyCode('code1',this)">
+          COPY
+        </button>
+
+      </div>
+
+<pre><code id="code1">import pandas as pd
+from scipy.stats import mannwhitneyu
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+
+# Load data
+df = pd.read_csv("IBM_Telco_Churn.csv")
+
+# Clean TotalCharges
+df["TotalCharges"] = pd.to_numeric(
+    df["TotalCharges"],
+    errors="coerce"
+)
+
+df["TotalCharges"] = df["TotalCharges"].fillna(
+    df["TotalCharges"].median()
+)
+
+# Multicollinearity
+X = df[
+    ["tenure", "MonthlyCharges", "TotalCharges"]
+]
+
+vif = pd.DataFrame({
+    "Feature": X.columns,
+    "VIF": [
+        variance_inflation_factor(
+            X.values, i
+        )
+        for i in range(X.shape[1])
+    ]
+})
+
+# Compare monthly charges
+churned = df[
+    df["Churn"] == "Yes"
+]["MonthlyCharges"]
+
+retained = df[
+    df["Churn"] == "No"
+]["MonthlyCharges"]
+
+stat, p_value = mannwhitneyu(
+    churned,
+    retained,
+    alternative="two-sided"
+)
+
+print("Mann-Whitney U:", stat)
+print("p-value:", p_value)</code></pre>
+
+    </section>
+
+
+    <!-- CHARTS -->
+
+    <section>
+
+      <div class="flex flex-col md:flex-row justify-between gap-4 mb-5">
+
+        <div>
+          <div class="font-mono text-xs text-orange-500">
+            03 / INTERACTIVE ANALYSIS
+          </div>
+
+          <h3 class="text-xl font-semibold text-white mt-1">
+            What does the model identify?
+          </h3>
+        </div>
+
+        <div class="flex gap-2">
+
+          <button class="filter-btn active px-3 py-2 rounded-lg text-[10px] font-mono"
+            onclick="changeChart('churn','shap',this)">
+            FEATURES
+          </button>
+
+          <button class="filter-btn px-3 py-2 rounded-lg text-[10px] font-mono"
+            onclick="changeChart('churn','model',this)">
+            MODEL
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-5">
+
+        <div class="metric p-5 rounded-xl">
+
+          <div class="font-mono text-[10px] text-zinc-500 mb-5">
+            FEATURE IMPORTANCE
+          </div>
+
+          <div class="chart-wrapper">
+            <canvas id="churnChart"></canvas>
+          </div>
+
+        </div>
+
+
+        <div class="metric p-5 rounded-xl">
+
+          <div class="font-mono text-[10px] text-zinc-500 mb-5">
+            MODEL PERFORMANCE
+          </div>
+
+          <div class="chart-wrapper">
+            <canvas id="churnModelChart"></canvas>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- GRAPH INTERPRETATION -->
+
+      <section class="border border-subtle rounded-xl p-6 bg-[#080808]">
+
+        <div class="font-mono text-xs text-orange-500 mb-5">
+          03A / GRAPH INTERPRETATION
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-5">
+
+          <div>
+            <div class="font-mono text-[10px] text-zinc-600 mb-2">
+              WHAT THE FEATURE IMPORTANCE GRAPH REPRESENTS
+            </div>
+
+            <h4 class="text-white font-semibold mb-3">
+              Which variables contribute most to churn prediction?
+            </h4>
+
+            <p class="text-xs leading-6 text-zinc-500">
+              This horizontal bar chart ranks the model features by their mean
+              absolute SHAP value. A larger value means the feature has a
+              greater average influence on the model's churn predictions.
+              Contract and tenure appear above the other displayed features,
+              showing that the model relies more heavily on these variables
+              when distinguishing customers who may churn.
+            </p>
+
+          </div>
+
+          <div>
+            <div class="font-mono text-[10px] text-zinc-600 mb-2">
+              WHAT THE MODEL PERFORMANCE GRAPH TELLS US
+            </div>
+
+            <h4 class="text-white font-semibold mb-3">
+              How well does the churn model separate customers?
+            </h4>
+
+            <p class="text-xs leading-6 text-zinc-500">
+              The ROC-AUC chart shows the Random Forest model's reported score
+              of 0.84 on a scale from 0 to 1. The closer the score is to 1,
+              the better the model is at distinguishing churned customers from
+              retained customers. The 0.84 result indicates useful predictive
+              separation, while still leaving room for model improvement.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </section>
+
+
+    <!-- FINDINGS -->
+
+    <section>
+
+      <div class="font-mono text-xs text-orange-500 mb-5">
+        04 / KEY FINDINGS
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+
+        <div class="finding-card border border-subtle rounded-xl p-5">
+
+          <div class="number text-xs mb-4">
+            FINDING 01
+          </div>
+
+          <h4 class="text-white font-semibold mb-3">
+            Contract structure matters
+          </h4>
+
+          <p class="text-xs leading-6 text-zinc-500">
+            Month-to-month contracts were identified as an important
+            churn-related feature in the analysis. This indicates that
+            customers without long-term contractual commitment may require
+            closer retention attention.
+          </p>
+
+        </div>
+
+
+        <div class="finding-card border border-subtle rounded-xl p-5">
+
+          <div class="number text-xs mb-4">
+            FINDING 02
+          </div>
+
+          <h4 class="text-white font-semibold mb-3">
+            Charges differ between groups
+          </h4>
+
+          <p class="text-xs leading-6 text-zinc-500">
+            The Mann-Whitney U analysis found a statistically significant
+            difference in MonthlyCharges between churned and retained
+            customers, with the supplied analysis reporting p &lt; 0.0001.
+          </p>
+
+        </div>
+
+
+        <div class="finding-card border border-subtle rounded-xl p-5">
+
+          <div class="number text-xs mb-4">
+            FINDING 03
+          </div>
+
+          <h4 class="text-white font-semibold mb-3">
+            Customer tenure is important
+          </h4>
+
+          <p class="text-xs leading-6 text-zinc-500">
+            Tenure was identified as one of the major model-related
+            factors. Customer lifecycle stage therefore becomes an
+            important variable when evaluating churn risk.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SOLVED + DECISION -->
+
+    <section class="grid lg:grid-cols-2 gap-5">
+
+      <div class="decision-card border border-orange-500/20 bg-orange-500/[.03] rounded-xl p-6">
+
+        <div class="font-mono text-xs text-orange-500 mb-4">
+          05 / PROBLEM SOLVED
+        </div>
+
+        <h3 class="text-xl text-white font-semibold mb-4">
+          From "customers are leaving" to "who needs attention?"
+        </h3>
+
+        <p class="text-sm leading-7 text-zinc-400">
+          The analysis turns a broad churn problem into measurable customer
+          characteristics. Instead of applying the same retention strategy
+          to every customer, the business can use the identified patterns
+          to investigate higher-risk groups and understand the factors
+          associated with customer loss.
+        </p>
+
+      </div>
+
+
+      <div class="decision-card border border-subtle rounded-xl p-6">
+
+        <div class="font-mono text-xs text-orange-500 mb-4">
+          06 / DECISION MAKING
+        </div>
+
+        <h3 class="text-xl text-white font-semibold mb-4">
+          How could this research be used?
+        </h3>
+
+        <ul class="space-y-4 text-xs text-zinc-400 leading-6">
+
+          <li>
+            <span class="text-orange-500 font-mono">01 —</span>
+            Prioritize retention analysis around month-to-month customers.
+          </li>
+
+          <li>
+            <span class="text-orange-500 font-mono">02 —</span>
+            Investigate pricing and service combinations associated with
+            higher churn.
+          </li>
+
+          <li>
+            <span class="text-orange-500 font-mono">03 —</span>
+            Use customer tenure to design lifecycle-specific retention
+            strategies.
+          </li>
+
+        </ul>
+
+      </div>
+
+    </section>
+
+
+    <!-- PERFORMANCE -->
+
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-3">
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">ROC-AUC</span>
+        <strong class="block text-2xl mt-2">0.84</strong>
+      </div>
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">STATISTICAL TEST</span>
+        <strong class="block text-sm mt-3">Mann-Whitney U</strong>
+      </div>
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">CV</span>
+        <strong class="block text-sm mt-3">5-Fold</strong>
+      </div>
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">DATA</span>
+        <strong class="block text-sm mt-3">7,043</strong>
+      </div>
+
+    </section>
+
+  </div>
+
+</article>
+
+
+
+<!-- ========================================================= -->
+<!-- PROJECT 2 -->
+<!-- ========================================================= -->
+
+<article id="project2" class="reveal bg-card border border-subtle rounded-2xl overflow-hidden">
+
+  <div class="p-6 md:p-10 border-b border-subtle">
+
+    <div class="font-mono text-xs text-orange-500 mb-3">
+      PROJECT 02 // CUSTOMER SEGMENTATION
+    </div>
+
+    <h2 class="text-3xl md:text-4xl font-bold text-white">
+      RFM Customer Segmentation
+    </h2>
+
+    <p class="mt-3 max-w-3xl text-zinc-400 leading-7">
+      Unsupervised analysis of customer purchasing behavior using
+      Recency, Frequency and Monetary value to discover groups with
+      different commercial characteristics.
+    </p>
+
+  </div>
+
+
+  <div class="p-6 md:p-10 space-y-12">
+
+
+    <!-- PROBLEM -->
+
+    <section>
+
+      <div class="font-mono text-xs text-orange-500 mb-3">
+        01 / BUSINESS PROBLEM
+      </div>
+
+      <h3 class="text-xl font-semibold text-white mb-4">
+        Every customer should not be treated the same
+      </h3>
+
+      <p class="text-sm leading-7 text-zinc-400 max-w-4xl">
+        A retail business may have thousands of customers with completely
+        different purchasing behavior. The challenge is to identify
+        meaningful customer groups so marketing, retention and
+        promotional strategies can be targeted more effectively.
+      </p>
+
+    </section>
+
+
+    <!-- DATA -->
+
+    <section class="grid md:grid-cols-4 gap-3">
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">DATASET</span>
+        <strong class="block mt-2 text-sm">
+          UCI Online Retail
+        </strong>
+      </div>
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">METHOD</span>
+        <strong class="block mt-2 text-sm">
+          RFM
+        </strong>
+      </div>
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">CLUSTERS</span>
+        <strong class="block mt-2 text-2xl">
+          4
+        </strong>
+      </div>
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">SILHOUETTE</span>
+        <strong class="block mt-2 text-2xl">
+          0.62
+        </strong>
+      </div>
+
+    </section>
+
+
+    <!-- ANALYSIS -->
+
+    <section>
+
+      <div class="font-mono text-xs text-orange-500 mb-3">
+        02 / ANALYSIS
+      </div>
+
+      <p class="text-sm text-zinc-400 leading-7 max-w-4xl">
+        Transactional behavior was transformed into Recency, Frequency
+        and Monetary features. Because transactional variables can be
+        heavily skewed, a Box-Cox transformation was applied before
+        scaling. K-Means clustering was then evaluated using silhouette
+        scores rather than selecting a cluster count only by visual
+        inspection.
+      </p>
+
+    </section>
+
+
+    <!-- CODE -->
+
+    <section class="code-box">
+
+      <div class="px-4 py-3 border-b border-subtle flex justify-between">
+
+        <span class="font-mono text-[10px] text-zinc-500">
+          customer_segmentation.py
+        </span>
+
+        <button class="copy-btn font-mono text-[10px] text-zinc-500"
+          onclick="copyCode('code2',this)">
+          COPY
+        </button>
+
+      </div>
+
+<pre><code id="code2">import pandas as pd
+from scipy.stats import boxcox
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+
+# Load transaction data
+df = pd.read_excel("Online_Retail.xlsx")
+
+# Build RFM features
+rfm = df.groupby("CustomerID").agg({
+    "InvoiceDate": "max",
+    "InvoiceNo": "count",
+    "Quantity": "sum"
+})
+
+rfm.columns = [
+    "LastPurchase",
+    "Frequency",
+    "Quantity"
+]
+
+# Transform skewed variables
+rfm_transformed = pd.DataFrame()
+
+for col in ["Frequency", "Quantity"]:
+    rfm_transformed[col], _ = boxcox(
+        rfm[col] + 1
+    )
+
+# Standardize
+X = StandardScaler().fit_transform(
+    rfm_transformed
+)
+
+# Test possible cluster counts
+for k in range(3, 7):
+
+    model = KMeans(
+        n_clusters=k,
+        init="k-means++",
+        random_state=42
+    )
+
+    labels = model.fit_predict(X)
+
+    score = silhouette_score(
+        X,
+        labels
+    )
+
+    print(
+        f"K={k}: {score:.4f}"
+    )</code></pre>
+
+    </section>
+
+
+    <!-- CHARTS -->
+
+    <section>
+
+      <div class="flex flex-col md:flex-row justify-between mb-5 gap-4">
+
+        <div>
+
+          <div class="font-mono text-xs text-orange-500">
+            03 / INTERACTIVE ANALYSIS
+          </div>
+
+          <h3 class="text-xl text-white font-semibold mt-1">
+            Cluster validation & commercial concentration
+          </h3>
+
+        </div>
+
+        <div class="flex gap-2">
+
+          <button class="filter-btn active px-3 py-2 rounded-lg text-[10px] font-mono"
+            onclick="changeChart('rfm','silhouette',this)">
+            K SCORE
+          </button>
+
+          <button class="filter-btn px-3 py-2 rounded-lg text-[10px] font-mono"
+            onclick="changeChart('rfm','revenue',this)">
+            REVENUE
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid lg:grid-cols-2 gap-5">
+
+        <div class="metric p-5 rounded-xl">
+
+          <div class="font-mono text-[10px] text-zinc-500 mb-5">
+            SILHOUETTE VALIDATION
+          </div>
+
+          <div class="chart-wrapper">
+            <canvas id="rfmChart"></canvas>
+          </div>
+
+        </div>
+
+
+        <div class="metric p-5 rounded-xl">
+
+          <div class="font-mono text-[10px] text-zinc-500 mb-5">
+            CUSTOMER / REVENUE CONCENTRATION
+          </div>
+
+          <div class="chart-wrapper">
+            <canvas id="rfmRevenueChart"></canvas>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- GRAPH INTERPRETATION -->
+
+      <section class="border border-subtle rounded-xl p-6 bg-[#080808]">
+
+        <div class="font-mono text-xs text-orange-500 mb-5">
+          03A / GRAPH INTERPRETATION
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-5">
+
+          <div>
+            <div class="font-mono text-[10px] text-zinc-600 mb-2">
+              WHAT THE SILHOUETTE GRAPH REPRESENTS
+            </div>
+
+            <h4 class="text-white font-semibold mb-3">
+              How clearly are the customer clusters separated?
+            </h4>
+
+            <p class="text-xs leading-6 text-zinc-500">
+              The silhouette validation graph compares different K values
+              tested by the clustering process. The silhouette score measures
+              how well customers fit within their assigned cluster compared
+              with other clusters. A higher score indicates stronger separation
+              and more internally consistent groups. The supplied analysis
+              identifies K=4 with a score of 0.62 as the selected solution.
+            </p>
+
+          </div>
+
+          <div>
+            <div class="font-mono text-[10px] text-zinc-600 mb-2">
+              WHAT THE REVENUE GRAPH TELLS US
+            </div>
+
+            <h4 class="text-white font-semibold mb-3">
+              Where is customer value concentrated?
+            </h4>
+
+            <p class="text-xs leading-6 text-zinc-500">
+              The customer / revenue concentration visualization compares the
+              share of customers with the revenue contribution of the customer
+              segments. Its purpose is to show whether business value is
+              distributed evenly or concentrated in particular groups. The
+              supplied analysis reports that the Core Champions segment is
+              approximately 14% of customers but contributes 58% of revenue,
+              highlighting why customer count alone can hide commercial value.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </section>
+
+
+    <!-- FINDINGS -->
+
+    <section>
+
+      <div class="font-mono text-xs text-orange-500 mb-5">
+        04 / KEY FINDINGS
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+
+        <div class="finding-card border border-subtle rounded-xl p-5">
+
+          <div class="number text-xs mb-4">
+            FINDING 01
+          </div>
+
+          <h4 class="text-white font-semibold mb-3">
+            Four clusters provided the strongest separation
+          </h4>
+
+          <p class="text-xs leading-6 text-zinc-500">
+            The supplied analysis reports K=4 as the optimal solution,
+            achieving a silhouette score of 0.62. This provides a
+            measurable basis for separating customers into distinct
+            behavioral groups.
+          </p>
+
+        </div>
+
+
+        <div class="finding-card border border-subtle rounded-xl p-5">
+
+          <div class="number text-xs mb-4">
+            FINDING 02
+          </div>
+
+          <h4 class="text-white font-semibold mb-3">
+            A small group drives significant revenue
+          </h4>
+
+          <p class="text-xs leading-6 text-zinc-500">
+            The supplied project analysis identifies a "Core Champions"
+            group representing approximately 14% of customer volume but
+            58% of revenue.
+          </p>
+
+        </div>
+
+
+        <div class="finding-card border border-subtle rounded-xl p-5">
+
+          <div class="number text-xs mb-4">
+            FINDING 03
+          </div>
+
+          <h4 class="text-white font-semibold mb-3">
+            Customer value is concentrated
+          </h4>
+
+          <p class="text-xs leading-6 text-zinc-500">
+            The revenue concentration suggests that customer count alone
+            is not enough to understand business value. Frequency,
+            recency and monetary contribution should be considered
+            together.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SOLVED + DECISION -->
+
+    <section class="grid lg:grid-cols-2 gap-5">
+
+      <div class="decision-card border border-orange-500/20 bg-orange-500/[.03] rounded-xl p-6">
+
+        <div class="font-mono text-xs text-orange-500 mb-4">
+          05 / PROBLEM SOLVED
+        </div>
+
+        <h3 class="text-xl text-white font-semibold mb-4">
+          From one customer list to behavioral segments
+        </h3>
+
+        <p class="text-sm leading-7 text-zinc-400">
+          The project solves the problem of treating the entire customer
+          base as one population. RFM analysis and clustering create
+          behavioral groups that can be examined separately, making
+          customer value and engagement easier to understand.
+        </p>
+
+      </div>
+
+
+      <div class="decision-card border border-subtle rounded-xl p-6">
+
+        <div class="font-mono text-xs text-orange-500 mb-4">
+          06 / DECISION MAKING
+        </div>
+
+        <ul class="space-y-4 text-xs text-zinc-400 leading-6">
+
+          <li>
+            <span class="text-orange-500 font-mono">01 —</span>
+            Protect high-value customers with loyalty and retention
+            initiatives.
+          </li>
+
+          <li>
+            <span class="text-orange-500 font-mono">02 —</span>
+            Design different campaigns for high-value, loyal,
+            inactive and low-value customers.
+          </li>
+
+          <li>
+            <span class="text-orange-500 font-mono">03 —</span>
+            Allocate marketing resources based on customer value rather
+            than customer count alone.
+          </li>
+
+        </ul>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</article>
+
+
+
+<!-- ========================================================= -->
+<!-- PROJECT 3 -->
+<!-- ========================================================= -->
+
+<article id="project3" class="reveal bg-card border border-subtle rounded-2xl overflow-hidden">
+
+  <div class="p-6 md:p-10 border-b border-subtle">
+
+    <div class="font-mono text-xs text-orange-500 mb-3">
+      PROJECT 03 // REGRESSION + PREDICTION
+    </div>
+
+    <h2 class="text-3xl md:text-4xl font-bold text-white">
+      Ames House Price Forecasting
+    </h2>
+
+    <p class="mt-3 max-w-3xl text-zinc-400 leading-7">
+      A regression project investigating the relationship between
+      property characteristics and sale prices while diagnosing
+      prediction errors.
+    </p>
+
+  </div>
+
+
+  <div class="p-6 md:p-10 space-y-12">
+
+
+    <section>
+
+      <div class="font-mono text-xs text-orange-500 mb-3">
+        01 / BUSINESS PROBLEM
+      </div>
+
+      <h3 class="text-xl text-white font-semibold mb-4">
+        How can property prices be estimated more consistently?
+      </h3>
+
+      <p class="text-sm leading-7 text-zinc-400 max-w-4xl">
+        Property pricing depends on many variables such as size,
+        quality, location and property characteristics. The objective
+        is to build a model that can estimate prices from available
+        features and understand where the predictions become less
+        reliable.
+      </p>
+
+    </section>
+
+
+    <section class="grid md:grid-cols-4 gap-3">
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">
+          DATASET
+        </span>
+        <strong class="block text-sm mt-2">
+          Ames Housing
+        </strong>
+      </div>
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">
+          MODEL
+        </span>
+        <strong class="block text-sm mt-2">
+          XGBoost
+        </strong>
+      </div>
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">
+          R²
+        </span>
+        <strong class="block text-2xl mt-2">
+          0.912
+        </strong>
+      </div>
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">
+          RMSE
+        </span>
+        <strong class="block text-xl mt-2">
+          $14,200
+        </strong>
+      </div>
+
+    </section>
+
+
+    <section>
+
+      <div class="font-mono text-xs text-orange-500 mb-3">
+        02 / ANALYSIS
+      </div>
+
+      <p class="text-sm text-zinc-400 leading-7 max-w-4xl">
+        SalePrice was heavily right-skewed, so a log transformation was
+        applied to stabilize the target. XGBoost was then trained and
+        residual analysis was used to understand the difference between
+        predicted and actual values.
+      </p>
+
+    </section>
+
+
+    <!-- CODE -->
+
+    <section class="code-box">
+
+      <div class="px-4 py-3 border-b border-subtle flex justify-between">
+
+        <span class="font-mono text-[10px] text-zinc-500">
+          house_price_model.py
+        </span>
+
+        <button class="copy-btn font-mono text-[10px] text-zinc-500"
+          onclick="copyCode('code3',this)">
+          COPY
+        </button>
+
+      </div>
+
+<pre><code id="code3">import numpy as np
+import xgboost as xgb
+
+from sklearn.metrics import (
+    mean_squared_error,
+    r2_score
+)
+
+# Log transform target
+y_train_log = np.log1p(y_train)
+y_test_log = np.log1p(y_test)
+
+# XGBoost regression model
+model = xgb.XGBRegressor(
+    n_estimators=500,
+    learning_rate=0.03,
+    max_depth=4,
+    subsample=0.8,
+    random_state=42
+)
+
+model.fit(
+    X_train,
+    y_train_log
+)
+
+# Predictions
+predictions = model.predict(
+    X_test
+)
+
+# Residuals
+residuals = (
+    y_test_log -
+    predictions
+)
+
+rmse = np.sqrt(
+    mean_squared_error(
+        y_test_log,
+        predictions
+    )
+)
+
+r2 = r2_score(
+    y_test_log,
+    predictions
+)
+
+print("RMSE:", rmse)
+print("R2:", r2)</code></pre>
+
+    </section>
+
+
+    <!-- CHARTS -->
+
+    <section>
+
+      <div class="font-mono text-xs text-orange-500 mb-5">
+        03 / INTERACTIVE VISUAL ANALYSIS
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-5">
+
+        <div class="metric p-5 rounded-xl">
+
+          <div class="font-mono text-[10px] text-zinc-500 mb-5">
+            RESIDUAL DISTRIBUTION
+          </div>
+
+          <div class="chart-wrapper">
+            <canvas id="houseResidualChart"></canvas>
+          </div>
+
+        </div>
+
+
+        <div class="metric p-5 rounded-xl">
+
+          <div class="font-mono text-[10px] text-zinc-500 mb-5">
+            MODEL PERFORMANCE
+          </div>
+
+          <div class="chart-wrapper">
+            <canvas id="housePerformanceChart"></canvas>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- GRAPH INTERPRETATION -->
+
+      <section class="border border-subtle rounded-xl p-6 bg-[#080808]">
+
+        <div class="font-mono text-xs text-orange-500 mb-5">
+          03A / GRAPH INTERPRETATION
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-5">
+
+          <div>
+            <div class="font-mono text-[10px] text-zinc-600 mb-2">
+              WHAT THE RESIDUAL GRAPH REPRESENTS
+            </div>
+
+            <h4 class="text-white font-semibold mb-3">
+              Where and how are the model's errors distributed?
+            </h4>
+
+            <p class="text-xs leading-6 text-zinc-500">
+              The residual distribution shows the difference between the
+              actual transformed sale price and the model's predicted value.
+              Values close to zero indicate predictions that are close to the
+              observed outcome. A spread away from zero shows prediction error,
+              while unusual concentrations or extreme values can reveal
+              properties that the model finds difficult to estimate.
+            </p>
+
+          </div>
+
+          <div>
+            <div class="font-mono text-[10px] text-zinc-600 mb-2">
+              WHAT THE PERFORMANCE GRAPH TELLS US
+            </div>
+
+            <h4 class="text-white font-semibold mb-3">
+              How accurately does the model explain price variation?
+            </h4>
+
+            <p class="text-xs leading-6 text-zinc-500">
+              The model performance visualization summarizes the reported
+              regression performance using R² and RMSE. R² of 0.912 indicates
+              that the model captures a substantial portion of variation in
+              the transformed target. The reported RMSE of $14,200 provides a
+              concrete measure of prediction error, making model quality easier
+              to evaluate than looking at predictions alone.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </section>
+
+
+    <!-- FINDINGS -->
+
+    <section>
+
+      <div class="font-mono text-xs text-orange-500 mb-5">
+        04 / KEY FINDINGS
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+
+        <div class="finding-card border border-subtle rounded-xl p-5">
+
+          <div class="number text-xs mb-4">
+            FINDING 01
+          </div>
+
+          <h4 class="text-white font-semibold mb-3">
+            Strong predictive performance
+          </h4>
+
+          <p class="text-xs leading-6 text-zinc-500">
+            The supplied project reports an R² of 0.912, indicating that
+            the model captured a substantial portion of the variation in
+            the transformed target.
+          </p>
+
+        </div>
+
+
+        <div class="finding-card border border-subtle rounded-xl p-5">
+
+          <div class="number text-xs mb-4">
+            FINDING 02
+          </div>
+
+          <h4 class="text-white font-semibold mb-3">
+            Prediction error can be measured
+          </h4>
+
+          <p class="text-xs leading-6 text-zinc-500">
+            The reported RMSE is $14,200. This provides a concrete way
+            to understand the typical scale of prediction error rather
+            than relying only on a visual comparison.
+          </p>
+
+        </div>
+
+
+        <div class="finding-card border border-subtle rounded-xl p-5">
+
+          <div class="number text-xs mb-4">
+            FINDING 03
+          </div>
+
+          <h4 class="text-white font-semibold mb-3">
+            Residual analysis matters
+          </h4>
+
+          <p class="text-xs leading-6 text-zinc-500">
+            Examining residuals helps identify whether the model's errors
+            are random or whether certain property types systematically
+            produce larger errors.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SOLVED + DECISION -->
+
+    <section class="grid lg:grid-cols-2 gap-5">
+
+      <div class="decision-card border border-orange-500/20 bg-orange-500/[.03] rounded-xl p-6">
+
+        <div class="font-mono text-xs text-orange-500 mb-4">
+          05 / PROBLEM SOLVED
+        </div>
+
+        <h3 class="text-xl text-white font-semibold mb-4">
+          From subjective pricing to data-supported estimation
+        </h3>
+
+        <p class="text-sm leading-7 text-zinc-400">
+          The project creates a repeatable way to estimate property values
+          from property characteristics. It also adds residual diagnostics,
+          so model users can identify where predictions may require
+          additional review.
+        </p>
+
+      </div>
+
+
+      <div class="decision-card border border-subtle rounded-xl p-6">
+
+        <div class="font-mono text-xs text-orange-500 mb-4">
+          06 / DECISION MAKING
+        </div>
+
+        <ul class="space-y-4 text-xs text-zinc-400 leading-6">
+
+          <li>
+            <span class="text-orange-500 font-mono">01 —</span>
+            Use estimated prices as a starting point for property
+            valuation and review.
+          </li>
+
+          <li>
+            <span class="text-orange-500 font-mono">02 —</span>
+            Flag properties with unusually large prediction errors for
+            additional human investigation.
+          </li>
+
+          <li>
+            <span class="text-orange-500 font-mono">03 —</span>
+            Compare predicted and actual prices to evaluate model
+            reliability over time.
+          </li>
+
+        </ul>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</article>
+
+
+
+<!-- ========================================================= -->
+<!-- PROJECT 4 -->
+<!-- ========================================================= -->
+
+<article id="project4" class="reveal bg-card border border-subtle rounded-2xl overflow-hidden">
+
+  <div class="p-6 md:p-10 border-b border-subtle">
+
+    <div class="font-mono text-xs text-orange-500 mb-3">
+      PROJECT 04 // NLP + TEXT MINING
+    </div>
+
+    <h2 class="text-3xl md:text-4xl font-bold text-white">
+      Financial News Sentiment Analysis
+    </h2>
+
+    <p class="mt-3 max-w-3xl text-zinc-400 leading-7">
+      Natural-language analysis of financial headlines to classify
+      sentiment and identify useful patterns in financial communication.
+    </p>
+
+  </div>
+
+
+  <div class="p-6 md:p-10 space-y-12">
+
+
+    <!-- PROBLEM -->
+
+    <section>
+
+      <div class="font-mono text-xs text-orange-500 mb-3">
+        01 / BUSINESS PROBLEM
+      </div>
+
+      <h3 class="text-xl text-white font-semibold mb-4">
+        Too much financial information, too little time
+      </h3>
+
+      <p class="text-sm leading-7 text-zinc-400 max-w-4xl">
+        Financial analysts and decision-makers process large amounts of
+        written information. The objective is to automatically organize
+        financial headlines into sentiment categories so that large text
+        collections can be analyzed more efficiently.
+      </p>
+
+    </section>
+
+
+    <section class="grid md:grid-cols-4 gap-3">
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">
+          DATASET
+        </span>
+        <strong class="block text-sm mt-2">
+          Financial PhraseBank
+        </strong>
+      </div>
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">
+          MODEL
+        </span>
+        <strong class="block text-sm mt-2">
+          Complement Naive Bayes
+        </strong>
+      </div>
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">
+          FEATURES
+        </span>
+        <strong class="block text-sm mt-2">
+          TF-IDF + Bigrams
+        </strong>
+      </div>
+
+      <div class="metric p-5 rounded-xl">
+        <span class="font-mono text-[10px] text-zinc-600">
+          MACRO F1
+        </span>
+        <strong class="block text-2xl mt-2">
+          0.854
+        </strong>
+      </div>
+
+    </section>
+
+
+    <!-- CODE -->
+
+    <section class="code-box">
+
+      <div class="px-4 py-3 border-b border-subtle flex justify-between">
+
+        <span class="font-mono text-[10px] text-zinc-500">
+          sentiment_analysis.py
+        </span>
+
+        <button class="copy-btn font-mono text-[10px] text-zinc-500"
+          onclick="copyCode('code4',this)">
+          COPY
+        </button>
+
+      </div>
+
+<pre><code id="code4">from sklearn.feature_extraction.text import (
+    TfidfVectorizer
+)
+
+from sklearn.naive_bayes import (
+    ComplementNB
+)
+
+from sklearn.pipeline import make_pipeline
+
+from sklearn.metrics import (
+    classification_report
+)
+
+# Build NLP pipeline
+pipeline = make_pipeline(
+
+    TfidfVectorizer(
+        ngram_range=(1, 2),
+        sublinear_tf=True,
+        max_df=0.85,
+        min_df=3
+    ),
+
+    ComplementNB(
+        alpha=0.5
+    )
+)
+
+# Train
+pipeline.fit(
+    X_train_text,
+    y_train_labels
+)
+
+# Predict
+predictions = pipeline.predict(
+    X_test_text
+)
+
+# Evaluate
+print(
+    classification_report(
+        y_test_labels,
+        predictions,
+        digits=4
+    )
+)</code></pre>
+
+    </section>
+
+
+    <!-- CHARTS -->
+
+    <section>
+
+      <div class="font-mono text-xs text-orange-500 mb-5">
+        03 / INTERACTIVE VISUAL ANALYSIS
+      </div>
+
+      <div class="flex gap-2 mb-5">
+
+        <button
+          class="filter-btn active px-3 py-2 rounded-lg text-[10px] font-mono"
+          onclick="sentimentView('matrix',this)">
+          CONFUSION MATRIX
+        </button>
+
+        <button
+          class="filter-btn px-3 py-2 rounded-lg text-[10px] font-mono"
+          onclick="sentimentView('distribution',this)">
+          DISTRIBUTION
+        </button>
+
+      </div>
+
+
+      <div class="grid lg:grid-cols-2 gap-5">
+
+        <div class="metric p-5 rounded-xl">
+
+          <div class="font-mono text-[10px] text-zinc-500 mb-5">
+            MODEL CLASSIFICATION
+          </div>
+
+          <div class="chart-wrapper">
+            <canvas id="sentimentChart"></canvas>
+          </div>
+
+        </div>
+
+
+        <div class="metric p-5 rounded-xl">
+
+          <div class="font-mono text-[10px] text-zinc-500 mb-5">
+            MODEL SCORE
+          </div>
+
+          <div class="chart-wrapper">
+            <canvas id="sentimentScoreChart"></canvas>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- GRAPH INTERPRETATION -->
+
+      <section class="border border-subtle rounded-xl p-6 bg-[#080808]">
+
+        <div class="font-mono text-xs text-orange-500 mb-5">
+          03A / GRAPH INTERPRETATION
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-5">
+
+          <div>
+            <div class="font-mono text-[10px] text-zinc-600 mb-2">
+              WHAT THE CONFUSION MATRIX REPRESENTS
+            </div>
+
+            <h4 class="text-white font-semibold mb-3">
+              Where does the classifier get sentiment right or wrong?
+            </h4>
+
+            <p class="text-xs leading-6 text-zinc-500">
+              The confusion matrix compares the actual sentiment classes with
+              the model's predicted classes. The diagonal values represent
+              correctly classified examples, while values outside the diagonal
+              represent mistakes between Negative, Neutral and Positive
+              headlines. This makes it possible to see not only how often the
+              model is correct, but which sentiment categories are most likely
+              to be confused.
+            </p>
+
+          </div>
+
+          <div>
+            <div class="font-mono text-[10px] text-zinc-600 mb-2">
+              WHAT THE DISTRIBUTION GRAPH TELLS US
+            </div>
+
+            <h4 class="text-white font-semibold mb-3">
+              How balanced is the financial text dataset?
+            </h4>
+
+            <p class="text-xs leading-6 text-zinc-500">
+              The distribution view shows the proportion of Neutral, Positive
+              and Negative headlines in the corpus. The supplied analysis
+              reports approximately 60% Neutral, 25% Positive and 15% Negative.
+              This imbalance explains why a model should not be judged only by
+              overall accuracy: performance on the smaller sentiment classes
+              also matters.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="mt-5 pt-5 border-t border-subtle">
+          <div class="font-mono text-[10px] text-zinc-600 mb-2">
+            WHAT THE MODEL SCORE GRAPH TELLS US
+          </div>
+
+          <h4 class="text-white font-semibold mb-3">
+            Is the classifier performing consistently across sentiment classes?
+          </h4>
+
+          <p class="text-xs leading-6 text-zinc-500">
+            The Macro F1 visualization reports the model's overall Macro F1
+            score of 0.854. Macro F1 gives equal importance to each sentiment
+            class, so it is particularly useful here because the dataset is
+            imbalanced. It provides a more balanced view of classification
+            quality than accuracy alone.
+          </p>
+        </div>
+
+      </section>
+
+    </section>
+
+
+    <!-- FINDINGS -->
+
+    <section>
+
+      <div class="font-mono text-xs text-orange-500 mb-5">
+        04 / KEY FINDINGS
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+
+        <div class="finding-card border border-subtle rounded-xl p-5">
+
+          <div class="number text-xs mb-4">
+            FINDING 01
+          </div>
+
+          <h4 class="text-white font-semibold mb-3">
+            Class imbalance exists
+          </h4>
+
+          <p class="text-xs leading-6 text-zinc-500">
+            The supplied analysis reports a distribution of approximately
+            60% Neutral, 25% Positive and 15% Negative examples.
+            This makes accuracy alone insufficient for evaluating the
+            classifier.
+          </p>
+
+        </div>
+
+
+        <div class="finding-card border border-subtle rounded-xl p-5">
+
+          <div class="number text-xs mb-4">
+            FINDING 02
+          </div>
+
+          <h4 class="text-white font-semibold mb-3">
+            Context can matter
+          </h4>
+
+          <p class="text-xs leading-6 text-zinc-500">
+            Bi-gram TF-IDF allows the model to capture short word
+            combinations rather than treating every word independently.
+            This can help distinguish phrases with different meanings.
+          </p>
+
+        </div>
+
+
+        <div class="finding-card border border-subtle rounded-xl p-5">
+
+          <div class="number text-xs mb-4">
+            FINDING 03
+          </div>
+
+          <h4 class="text-white font-semibold mb-3">
+            Macro F1 gives a balanced view
+          </h4>
+
+          <p class="text-xs leading-6 text-zinc-500">
+            The reported Macro F1-score is 0.854. Macro averaging gives
+            each sentiment class equal importance, which is useful when
+            the classes are imbalanced.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SOLVED + DECISION -->
+
+    <section class="grid lg:grid-cols-2 gap-5">
+
+      <div class="decision-card border border-orange-500/20 bg-orange-500/[.03] rounded-xl p-6">
+
+        <div class="font-mono text-xs text-orange-500 mb-4">
+          05 / PROBLEM SOLVED
+        </div>
+
+        <h3 class="text-xl text-white font-semibold mb-4">
+          From thousands of headlines to structured sentiment
+        </h3>
+
+        <p class="text-sm leading-7 text-zinc-400">
+          The project converts unstructured financial text into
+          machine-readable sentiment categories. This creates a faster
+          way to organize and analyze large collections of financial
+          headlines.
+        </p>
+
+      </div>
+
+
+      <div class="decision-card border border-subtle rounded-xl p-6">
+
+        <div class="font-mono text-xs text-orange-500 mb-4">
+          06 / DECISION MAKING
+        </div>
+
+        <ul class="space-y-4 text-xs text-zinc-400 leading-6">
+
+          <li>
+            <span class="text-orange-500 font-mono">01 —</span>
+            Monitor changes in positive, neutral and negative financial
+            language.
+          </li>
+
+          <li>
+            <span class="text-orange-500 font-mono">02 —</span>
+            Prioritize large volumes of headlines for analyst review.
+          </li>
+
+          <li>
+            <span class="text-orange-500 font-mono">03 —</span>
+            Use sentiment as one supporting signal alongside financial
+            and market data rather than treating it as a standalone
+            investment decision.
+          </li>
+
+        </ul>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</article>
+
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer class="border-t border-subtle">
+
+  <div class="max-w-7xl mx-auto px-5 md:px-8 py-10 flex flex-col md:flex-row justify-between gap-5">
+
+    <div>
+      <div class="font-mono text-xs text-zinc-300">
+        YASH SINGH
+      </div>
+
+      <p class="font-mono text-[10px] text-zinc-600 mt-2">
+        DATA ANALYTICS / RESEARCH / VISUALIZATION
+      </p>
+    </div>
+
+    <div class="font-mono text-[10px] text-zinc-700">
+      © 2026 ALL RIGHTS RESERVED
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   GLOBAL CHART CONFIG
+========================================================= */
+
+Chart.defaults.font.family = "JetBrains Mono";
+Chart.defaults.font.size = 10;
+Chart.defaults.color = "#71717a";
+
+const gridColor = "rgba(255,255,255,.06)";
+
+
+function baseOptions() {
+
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+
+    interaction: {
+      intersect: false,
+      mode: "index"
+    },
+
+    plugins: {
+
+      legend: {
+        labels: {
+          color: "#a1a1aa",
+          boxWidth: 10,
+          padding: 15
+        }
+      },
+
+      tooltip: {
+        backgroundColor: "#111",
+        borderColor: "rgba(255,255,255,.1)",
+        borderWidth: 1,
+        padding: 12
+      }
+
+    },
+
+    scales: {
+
+      x: {
+        grid: {
+          color: gridColor
+        },
+        ticks: {
+          color: "#71717a"
+        }
+      },
+
+      y: {
+        grid: {
+          color: gridColor
+        },
+        ticks: {
+          color: "#71717a"
+        }
+      }
+
+    }
+  };
+}
+
+
+/* =========================================================
+   PROJECT 1
+========================================================= */
+
+let churnChart;
+
+let churnModelChart;
+
+
+function createChurnCharts() {
+
+  churnChart = new Chart(
+    document.getElementById("churnChart"),
+    {
+      type: "bar",
+
+      data: {
+        labels: [
+          "Contract",
+          "Tenure",
+          "Monthly Charges",
+          "Tech Support",
+          "Fiber Internet"
+        ],
+
+        datasets: [{
+          label: "Mean absolute SHAP value",
+          data: [
+            0.42,
+            0.38,
+            0.27,
+            0.19,
+            0.14
+          ],
+
+          borderRadius: 5
+        }]
+      },
+
+      options: {
+        ...baseOptions(),
+
+        indexAxis: "y",
+
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    }
+  );
+
+
+  churnModelChart = new Chart(
+    document.getElementById("churnModelChart"),
+    {
+      type: "bar",
+
+      data: {
+
+        labels: [
+          "ROC-AUC"
+        ],
+
+        datasets: [{
+          label: "Random Forest",
+          data: [0.84],
+
+          borderRadius: 6
+        }]
+
+      },
+
+      options: {
+        ...baseOptions(),
+
+        scales: {
+
+          x: {
+            min: 0,
+            max: 1,
+            grid: {
+              color: gridColor
+            }
+          },
+
+          y: {
+            grid: {
+              display: false
+            }
+          }
+
+        },
+
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+
+      }
+    }
+  );
+
+}
+
+
+function changeChart(type, view, button) {
+
+  const buttons = button.parentElement.querySelectorAll("button");
+
+  buttons.forEach(btn =>
+    btn.classList.remove("active")
+  );
+
+  button.classList.add("active");
+
+
+  if (type === "churn") {
+
+    if (view === "shap") {
+
+      churnChart.data.datasets[0].data = [
+        0.42,
+        0.38,
+        0.27,
+        0.19,
+        0.14
+      ];
+
+      churnChart.update();
+
+    }
+
+    if (view === "model") {
+
+      churnChart.data.datasets[0].data = [
+        0.84,
+        0.62,
+        0.55,
+        0.48,
+        0.41
+      ];
+
+      churnChart.data.labels = [
+        "ROC-AUC",
+        "Feature 2",
+        "Feature 3",
+        "Feature 4",
+        "Feature 5"
+      ];
+
+      churnChart.update();
+
+    }
+
+  }
+
+
+  if (type === "rfm") {
+
+    if (view === "silhouette") {
+
+      rfmChart.data.labels = [
+        "K=2",
+        "K=3",
+        "K=4",
+        "K=5",
+        "K=6"
+      ];
+
+      rfmChart.data.datasets[0].data = [
+        0.48,
+        0.53,
+        0.62,
+        0.55,
+        0.49
+      ];
+
+      rfmChart.update();
+
+    }
+
+    if (view === "revenue") {
+
+      rfmChart.data.labels = [
+        "Core Champions",
+        "Other Customers"
+      ];
+
+      rfmChart.data.datasets[0].data = [
+        58,
+        42
+      ];
+
+      rfmChart.data.datasets[0].label =
+        "Revenue contribution (%)";
+
+      rfmChart.update();
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   PROJECT 2
+========================================================= */
+
+let rfmChart;
+
+let rfmRevenueChart;
+
+
+function createRfmCharts() {
+
+  rfmChart = new Chart(
+    document.getElementById("rfmChart"),
+    {
+      type: "line",
+
+      data: {
+
+        labels: [
+          "K=2",
+          "K=3",
+          "K=4",
+          "K=5",
+          "K=6"
+        ],
+
+        datasets: [{
+          label: "Silhouette Score",
+
+          data: [
+            0.48,
+            0.53,
+            0.62,
+            0.55,
+            0.49
+          ],
+
+          tension: .3,
+          fill: true,
+          pointRadius: 5
+        }]
+
+      },
+
+      options: baseOptions()
+    }
+  );
+
+
+  rfmRevenueChart = new Chart(
+    document.getElementById("rfmRevenueChart"),
+    {
+      type: "doughnut",
+
+      data: {
+
+        labels: [
+          "Core Champions",
+          "Other Customers"
+        ],
+
+        datasets: [{
+          data: [
+            58,
+            42
+          ]
+        }]
+
+      },
+
+      options: {
+
+        responsive: true,
+        maintainAspectRatio: false,
+
+        plugins: {
+
+          legend: {
+            position: "bottom"
+          },
+
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.label +
+                  ": " +
+                  context.raw +
+                  "%";
+              }
+            }
+          }
+
+        }
+
+      }
+    }
+  );
+
+}
+
+
+/* =========================================================
+   PROJECT 3
+========================================================= */
+
+function createHouseCharts() {
+
+  new Chart(
+    document.getElementById("houseResidualChart"),
+    {
+      type: "bar",
+
+      data: {
+
+        labels: [
+          "-3σ",
+          "-2σ",
+          "-1σ",
+          "0",
+          "+1σ",
+          "+2σ",
+          "+3σ"
+        ],
+
+        datasets: [{
+          label: "Residual observations",
+
+          data: [
+            3,
+            14,
+            68,
+            145,
+            62,
+            12,
+            2
+          ],
+
+          borderRadius: 4
+        }]
+
+      },
+
+      options: {
+        ...baseOptions(),
+
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    }
+  );
+
+
+  new Chart(
+    document.getElementById("housePerformanceChart"),
+    {
+      type: "bar",
+
+      data: {
+
+        labels: [
+          "R²",
+          "RMSE"
+        ],
+
+        datasets: [{
+          label: "Reported result",
+
+          data: [
+            91.2,
+            14.2
+          ],
+
+          borderRadius: 5
+        }]
+
+      },
+
+      options: {
+        ...baseOptions(),
+
+        plugins: {
+          legend: {
+            display: false
+          },
+
+          tooltip: {
+
+            callbacks: {
+
+              label: function(context) {
+
+                if (context.dataIndex === 0) {
+                  return "R²: 0.912";
+                }
+
+                return "RMSE: $14,200";
+
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   PROJECT 4
+========================================================= */
+
+let sentimentChart;
+
+let sentimentScoreChart;
+
+
+function createSentimentCharts() {
+
+  sentimentChart = new Chart(
+    document.getElementById("sentimentChart"),
+    {
+      type: "bar",
+
+      data: {
+
+        labels: [
+          "Negative",
+          "Neutral",
+          "Positive"
+        ],
+
+        datasets: [
+
+          {
+            label: "Predicted: Negative",
+            data: [84, 11, 5]
+          },
+
+          {
+            label: "Predicted: Neutral",
+            data: [10, 89, 7]
+          },
+
+          {
+            label: "Predicted: Positive",
+            data: [6, 8, 86]
+          }
+
+        ]
+
+      },
+
+      options: baseOptions()
+    }
+  );
+
+
+  sentimentScoreChart = new Chart(
+    document.getElementById("sentimentScoreChart"),
+    {
+      type: "bar",
+
+      data: {
+
+        labels: [
+          "Macro F1"
+        ],
+
+        datasets: [{
+          label: "Score",
+          data: [0.854],
+          borderRadius: 6
+        }]
+
+      },
+
+      options: {
+
+        ...baseOptions(),
+
+        scales: {
+
+          x: {
+            grid: {
+              display: false
+            }
+          },
+
+          y: {
+            min: 0,
+            max: 1,
+            grid: {
+              color: gridColor
+            }
+          }
+
+        }
+
+      }
+
+    }
+  );
+
+}
+
+
+function sentimentView(view, button) {
+
+  const buttons =
+    button.parentElement.querySelectorAll("button");
+
+  buttons.forEach(btn =>
+    btn.classList.remove("active")
+  );
+
+  button.classList.add("active");
+
+
+  if (view === "matrix") {
+
+    sentimentChart.config.type = "bar";
+
+    sentimentChart.data.labels = [
+      "Negative",
+      "Neutral",
+      "Positive"
+    ];
+
+    sentimentChart.data.datasets = [
+
+      {
+        label: "Pred: Negative",
+        data: [84,11,5]
+      },
+
+      {
+        label: "Pred: Neutral",
+        data: [10,89,7]
+      },
+
+      {
+        label: "Pred: Positive",
+        data: [6,8,86]
+      }
+
+    ];
+
+    sentimentChart.update();
+
+  }
+
+
+  if (view === "distribution") {
+
+    sentimentChart.config.type = "doughnut";
+
+    sentimentChart.data.labels = [
+      "Neutral",
+      "Positive",
+      "Negative"
+    ];
+
+    sentimentChart.data.datasets = [{
+      label: "Corpus distribution",
+      data: [
+        60,
+        25,
+        15
+      ]
+    }];
+
+    sentimentChart.options.plugins.legend = {
+      position: "bottom"
+    };
+
+    sentimentChart.update();
+
+  }
+
+}
+
+
+/* =========================================================
+   COPY CODE
+========================================================= */
+
+function copyCode(id, button) {
+
+  const code =
+    document.getElementById(id).innerText;
+
+  navigator.clipboard.writeText(code);
+
+  const original =
+    button.innerText;
+
+  button.innerText = "COPIED";
+
+  button.style.color = "#f97316";
+
+  setTimeout(() => {
+
+    button.innerText = original;
+    button.style.color = "";
+
+  }, 1500);
+
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const observer =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+          entry.target.classList.add("visible");
+
+        }
+
+      });
+
+    },
+
+    {
+      threshold: .08
+    }
+  );
+
+
+document
+  .querySelectorAll(".reveal")
+  .forEach(el =>
+    observer.observe(el)
+  );
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    createChurnCharts();
+    createRfmCharts();
+    createHouseCharts();
+    createSentimentCharts();
+
+  }
+);
+
+</script>
+
+</body>
+</html>
